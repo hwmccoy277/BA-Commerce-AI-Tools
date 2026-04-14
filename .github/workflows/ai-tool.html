@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triple Whale MCP — Marketer's Guide</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0f172a;
+    --navy-mid: #1e293b;
+    --navy-light: #334155;
+    --accent: #6366f1;
+    --accent-light: #818cf8;
+    --accent-bg: #eef2ff;
+    --green: #10b981;
+    --green-bg: #ecfdf5;
+    --red: #ef4444;
+    --red-bg: #fef2f2;
+    --yellow: #f59e0b;
+    --yellow-bg: #fffbeb;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --bg: #f8fafc;
+    --white: #ffffff;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,.08), 0 2px 4px -2px rgba(0,0,0,.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.08), 0 4px 6px -4px rgba(0,0,0,.06);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+  }
+
+  /* ── Header ── */
+  .site-header {
+    background: var(--navy);
+    color: white;
+    padding: 48px 24px 40px;
+    text-align: center;
+  }
+  .site-header .badge {
+    display: inline-block;
+    background: rgba(99,102,241,.25);
+    color: var(--accent-light);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .site-header h1 {
+    font-size: clamp(24px, 5vw, 40px);
+    font-weight: 800;
+    letter-spacing: -.02em;
+    margin-bottom: 12px;
+  }
+  .site-header p {
+    font-size: 17px;
+    color: #94a3b8;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* ── Sticky nav ── */
+  .tab-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+  .tab-nav-inner {
+    display: flex;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+    gap: 4px;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 16px 20px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    border-bottom: 2px solid transparent;
+    transition: color .15s, border-color .15s;
+    white-space: nowrap;
+    font-family: inherit;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ── Sections ── */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* ── Typography ── */
+  h2 {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -.02em;
+    margin-bottom: 8px;
+    color: var(--navy);
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--navy);
+  }
+  h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--navy);
+  }
+  .section-intro {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    max-width: 640px;
+  }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .card.accent-border { border-left: 3px solid var(--accent); }
+
+  /* ── Install Steps ── */
+  .steps { counter-reset: step; list-style: none; }
+  .step {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 28px;
+    align-items: flex-start;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+  .step-body { flex: 1; }
+  .step-body h4 { margin-bottom: 4px; }
+  .step-body p { font-size: 15px; color: var(--text-muted); margin-bottom: 10px; }
+  .step-body a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .step-body a:hover { text-decoration: underline; }
+
+  /* ── Code blocks ── */
+  .code-block {
+    background: var(--navy);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-top: 10px;
+  }
+  .code-block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 14px;
+    background: var(--navy-mid);
+    border-bottom: 1px solid var(--navy-light);
+  }
+  .code-block-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #94a3b8;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+  .copy-btn {
+    background: none;
+    border: 1px solid var(--navy-light);
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all .15s;
+    font-family: inherit;
+  }
+  .copy-btn:hover { background: var(--navy-light); color: white; }
+  .copy-btn.copied { background: var(--green); border-color: var(--green); color: white; }
+  code, pre {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  }
+  .code-block pre {
+    padding: 14px 16px;
+    font-size: 13.5px;
+    color: #e2e8f0;
+    overflow-x: auto;
+    line-height: 1.65;
+  }
+  .code-inline {
+    background: #f1f5f9;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-size: 13px;
+    color: var(--navy);
+  }
+
+  /* ── What you need ── */
+  .requirements {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+  .req-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .req-icon {
+    font-size: 24px;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .req-title { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .req-desc { font-size: 13px; color: var(--text-muted); }
+  .req-desc a { color: var(--accent); text-decoration: none; font-weight: 600; }
+
+  /* ── Tip box ── */
+  .tip {
+    display: flex;
+    gap: 12px;
+    background: var(--accent-bg);
+    border: 1px solid #c7d2fe;
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin: 14px 0;
+    font-size: 14px;
+    color: #3730a3;
+  }
+  .tip-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── Accordion capabilities ── */
+  .accordion { margin-bottom: 12px; }
+  .accordion-trigger {
+    width: 100%;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    text-align: left;
+    transition: box-shadow .15s, border-color .15s;
+    font-family: inherit;
+    box-shadow: var(--shadow);
+  }
+  .accordion-trigger:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
+  .accordion-trigger.open {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-color: transparent;
+    border-color: var(--accent);
+  }
+  .acc-emoji { font-size: 22px; flex-shrink: 0; }
+  .acc-title-wrap { flex: 1; }
+  .acc-title { font-size: 16px; font-weight: 700; color: var(--navy); }
+  .acc-sub { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+  .acc-arrow {
+    font-size: 18px;
+    color: var(--text-muted);
+    transition: transform .2s;
+    flex-shrink: 0;
+  }
+  .accordion-trigger.open .acc-arrow { transform: rotate(180deg); }
+  .accordion-body {
+    display: none;
+    background: var(--white);
+    border: 1px solid var(--accent);
+    border-top: none;
+    border-bottom-left-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+    padding: 0 24px 24px;
+  }
+  .accordion-body.open { display: block; }
+  .acc-desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    padding: 16px 0 14px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 18px;
+  }
+  .prompt-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .prompt-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+  }
+  .prompt-text {
+    flex: 1;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.45;
+    font-style: italic;
+  }
+  .prompt-copy {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all .15s;
+    font-family: inherit;
+    white-space: nowrap;
+    margin-top: 1px;
+  }
+  .prompt-copy:hover { background: var(--accent); color: white; border-color: var(--accent); }
+  .prompt-copy.copied { background: var(--green); color: white; border-color: var(--green); }
+  .tool-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .tool-tag {
+    font-size: 11px;
+    font-weight: 600;
+    background: #f1f5f9;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 2px 9px;
+    letter-spacing: .04em;
+  }
+
+  /* ── Section 3: Best Practices ── */
+  .example-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .example-table th {
+    padding: 11px 16px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .example-table th:first-child { background: #fef2f2; color: var(--red); }
+  .example-table th:last-child { background: #ecfdf5; color: #059669; }
+  .example-table td {
+    padding: 11px 16px;
+    border-top: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .example-table td:first-child { color: var(--text-muted); font-style: italic; }
+  .example-table td:last-child { font-weight: 500; }
+
+  .practices-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .practice-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    box-shadow: var(--shadow);
+  }
+  .practice-num {
+    width: 28px;
+    height: 28px;
+    background: var(--accent-bg);
+    color: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .practice-text { flex: 1; font-size: 15px; }
+  .practice-text strong { color: var(--navy); }
+
+  /* ── Prompt bank ── */
+  .prompt-bank-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .bank-pill {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-size: 13.5px;
+    font-style: italic;
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+    transition: border-color .15s, box-shadow .15s;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-family: inherit;
+    line-height: 1.4;
+  }
+  .bank-pill:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
+  .bank-pill.copied { border-color: var(--green); background: var(--green-bg); }
+  .bank-pill-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+  .bank-section-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 28px 0 10px;
+  }
+  .bank-section-label:first-child { margin-top: 8px; }
+
+  /* ── Toast ── */
+  #toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--navy);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 999;
+    transition: transform .25s cubic-bezier(.34,1.56,.64,1), opacity .25s;
+    opacity: 0;
+    pointer-events: none;
+  }
+  #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+  /* ── Dividers / labels ── */
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .content { padding: 32px 16px 60px; }
+    .requirements { grid-template-columns: 1fr; }
+    .tab-btn { padding: 14px 14px 12px; font-size: 13px; }
+    .example-table { font-size: 13px; }
+    .example-table td, .example-table th { padding: 9px 12px; }
+    .prompt-bank-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="badge">Marketer's Guide</div>
+  <h1>Triple Whale MCP</h1>
+  <p>Ask questions about your store's performance directly in Claude. No dashboards, no spreadsheets — just answers.</p>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="showTab('capabilities')">⚡ What It Can Do</button>
+    <button class="tab-btn" onclick="showTab('howto')">💡 How To Use It</button>
+    <button class="tab-btn" onclick="showTab('install')">🚀 Getting Started</button>
+  </div>
+</nav>
+
+<div id="toast">Copied to clipboard!</div>
+
+<!-- ════════════════════════════════════════════
+     SECTION 1 — GETTING STARTED
+═══════════════════════════════════════════════ -->
+<section class="section" id="section-install">
+<div class="content">
+
+  <div class="section-label">Getting Started</div>
+  <h2>Install Guide</h2>
+  <p class="section-intro">This connects Triple Whale to Claude Desktop so you can have real conversations about your store data. Setup takes about 10 minutes.</p>
+
+  <h3 style="margin-bottom:16px;">What you'll need</h3>
+  <div class="requirements">
+    <div class="req-card">
+      <div class="req-icon">🖥️</div>
+      <div>
+        <div class="req-title">Claude Desktop</div>
+        <div class="req-desc">The desktop app for Claude. <a href="https://claude.ai/download" target="_blank">Download it here</a> — it's free.</div>
+      </div>
+    </div>
+    <div class="req-card">
+      <div class="req-icon">🔑</div>
+      <div>
+        <div class="req-title">Triple Whale API Key</div>
+        <div class="req-desc">Found in your Triple Whale account under Settings → API.</div>
+      </div>
+    </div>
+    <div class="req-card">
+      <div class="req-icon">⚙️</div>
+      <div>
+        <div class="req-title">Node.js</div>
+        <div class="req-desc">A free tool that runs the server. <a href="https://nodejs.org" target="_blank">Download the LTS version</a>.</div>
+      </div>
+    </div>
+    <div class="req-card">
+      <div class="req-icon">🏪</div>
+      <div>
+        <div class="req-title">Your Shopify Store URL</div>
+        <div class="req-desc">In the format <code class="code-inline">yourstore.myshopify.com</code> — find it in Shopify admin.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-bottom:20px;">Step-by-step setup</h3>
+  <ol class="steps">
+
+    <li class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h4>Install Node.js</h4>
+        <p>Go to <a href="https://nodejs.org" target="_blank">nodejs.org</a> and download the <strong>LTS</strong> version. Run the installer — no special options needed. Once done, you won't need to touch it again.</p>
+      </div>
+    </li>
+
+    <li class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h4>Download the MCP server</h4>
+        <p>If you've been given a ZIP file, unzip it somewhere easy to find (like your Desktop or Documents). If you're using git, run:</p>
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-block-label">Terminal</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre>git clone https://github.com/your-org/tw-mcp.git
+cd tw-mcp</pre>
+        </div>
+      </div>
+    </li>
+
+    <li class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h4>Build the server</h4>
+        <p>Open Terminal (Mac) or Command Prompt (Windows), navigate to the folder you just downloaded, and run these two commands:</p>
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-block-label">Terminal</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre>npm install
+npm run build</pre>
+        </div>
+        <p style="margin-top:8px;">You should see a <code class="code-inline">dist/</code> folder appear when it's done. If you see errors, check that Node.js installed correctly.</p>
+      </div>
+    </li>
+
+    <li class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h4>Open the Claude Desktop config file</h4>
+        <p>This is the file that tells Claude which tools to load. Open it in any text editor (Notepad, TextEdit, VS Code).</p>
+        <div class="card" style="background:#f8fafc; padding:14px 16px; margin:10px 0;">
+          <div style="font-size:13px; font-weight:700; margin-bottom:8px; color:var(--text-muted);">File location:</div>
+          <div style="margin-bottom:8px;">
+            <strong>Mac:</strong>
+            <div class="code-block" style="margin-top:6px;">
+              <div class="code-block-header">
+                <span class="code-block-label">Path</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+              </div>
+              <pre>~/Library/Application Support/Claude/claude_desktop_config.json</pre>
+            </div>
+          </div>
+          <div>
+            <strong>Windows:</strong>
+            <div class="code-block" style="margin-top:6px;">
+              <div class="code-block-header">
+                <span class="code-block-label">Path</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+              </div>
+              <pre>%APPDATA%\Claude\claude_desktop_config.json</pre>
+            </div>
+          </div>
+        </div>
+        <div class="tip">
+          <span class="tip-icon">💡</span>
+          <span>On Mac, the Library folder is hidden by default. In Finder, press <strong>Cmd + Shift + G</strong> and paste the path above to navigate there directly.</span>
+        </div>
+      </div>
+    </li>
+
+    <li class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h4>Add Triple Whale to the config</h4>
+        <p>Inside the config file, find the <code class="code-inline">"mcpServers"</code> section and add the following block. Replace the placeholders with your actual values.</p>
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-block-label">claude_desktop_config.json</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre>"triple-whale": {
+  "command": "node",
+  "args": ["/path/to/tw-mcp/dist/index.js"],
+  "env": {
+    "TRIPLE_WHALE_API_KEY": "your-api-key-here",
+    "TRIPLE_WHALE_SHOPS": "yourstore.myshopify.com:Your Store Name"
+  }
+}</pre>
+        </div>
+        <div class="tip" style="margin-top:12px;">
+          <span class="tip-icon">📁</span>
+          <span>Replace <code class="code-inline">/path/to/tw-mcp</code> with the actual folder path where you downloaded the server. On Mac this might be something like <code class="code-inline">/Users/yourname/Documents/tw-mcp</code>.</span>
+        </div>
+      </div>
+    </li>
+
+    <li class="step">
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <h4>Set up your stores</h4>
+        <p>The <code class="code-inline">TRIPLE_WHALE_SHOPS</code> value lists every store you want to access. Format is <code class="code-inline">shopify-url:Display Name</code>, with multiple stores separated by commas:</p>
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-block-label">Multiple stores example</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre>"TRIPLE_WHALE_SHOPS": "store-one.myshopify.com:Brand One,store-two.myshopify.com:Brand Two"</pre>
+        </div>
+      </div>
+    </li>
+
+    <li class="step">
+      <div class="step-num">7</div>
+      <div class="step-body">
+        <h4>Restart Claude Desktop</h4>
+        <p>Fully quit Claude Desktop (don't just close the window — right-click the icon and choose Quit) and reopen it. This is important — it won't load the new config until you do.</p>
+      </div>
+    </li>
+
+    <li class="step">
+      <div class="step-num">8</div>
+      <div class="step-body">
+        <h4>Test it out</h4>
+        <p>Open a new chat in Claude and ask:</p>
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-block-label">Test prompt</span>
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          </div>
+          <pre>What shops do I have configured?</pre>
+        </div>
+        <p style="margin-top:8px;">If everything worked, Claude will list your stores. If you see an error, double-check the file path in step 5 and make sure you fully restarted Claude.</p>
+      </div>
+    </li>
+
+  </ol>
+
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SECTION 2 — CAPABILITIES
+═══════════════════════════════════════════════ -->
+<section class="section active" id="section-capabilities">
+<div class="content">
+
+  <div class="section-label">Capabilities</div>
+  <h2>What It Can Do</h2>
+  <p class="section-intro">Everything you can ask about, organized by topic. Click any category to expand it and see example questions you can use straight away.</p>
+
+  <!-- 1. Business Health -->
+  <div class="accordion">
+    <button class="accordion-trigger" onclick="toggleAccordion(this)">
+      <span class="acc-emoji">📊</span>
+      <div class="acc-title-wrap">
+        <div class="acc-title">Business Health</div>
+        <div class="acc-sub">The big picture — revenue, profit, and overall performance</div>
+      </div>
+      <span class="acc-arrow">▾</span>
+    </button>
+    <div class="accordion-body">
+      <p class="acc-desc">Get a full snapshot of how your business is performing — revenue, orders, average order value, ad spend, profit margin, and blended ROAS. You can also compare any two time periods side by side to see exactly what changed and by how much.</p>
+      <div class="prompt-grid">
+        <div class="prompt-row"><span class="prompt-text">"Give me a business health summary for Sunny Within for the last 30 days."</span><button class="prompt-copy" onclick="copyPrompt(this, 'Give me a business health summary for Sunny Within for the last 30 days.')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"How did The Fidget Games perform this month compared to last month? Show me revenue, orders, and ad spend."</span><button class="prompt-copy" onclick="copyPrompt(this, 'How did The Fidget Games perform this month compared to last month? Show me revenue, orders, and ad spend.')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Compare Q1 this year vs Q1 last year for FOCL — revenue, ROAS, and profit."</span><button class="prompt-copy" onclick="copyPrompt(this, 'Compare Q1 this year vs Q1 last year for FOCL — revenue, ROAS, and profit.')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"What's our blended ROAS for Sophie Grace year to date?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'What\'s our blended ROAS for Sophie Grace year to date?')">Copy</button></div>
+      </div>
+      <div class="tool-tags">
+        <span class="tool-tag">tw_get_business_summary</span>
+        <span class="tool-tag">tw_get_period_comparison</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Ad Performance -->
+  <div class="accordion">
+    <button class="accordion-trigger" onclick="toggleAccordion(this)">
+      <span class="acc-emoji">📣</span>
+      <div class="acc-title-wrap">
+        <div class="acc-title">Ad Performance</div>
+        <div class="acc-sub">Channel, campaign, and ad set level — how your paid media is working</div>
+      </div>
+      <span class="acc-arrow">▾</span>
+    </button>
+    <div class="accordion-body">
+      <p class="acc-desc">See how each advertising channel is performing (Facebook, Google, TikTok, etc.), drill into specific campaigns, and go all the way down to individual ad sets. All numbers use Triple Whale's attribution — more accurate than what the platforms self-report.</p>
+      <div class="prompt-grid">
+        <div class="prompt-row"><span class="prompt-text">"How are Facebook and Google performing for Stars & Honey this month? Compare spend, ROAS, and CPA."</span><button class="prompt-copy" onclick="copyPrompt(this, 'How are Facebook and Google performing for Stars & Honey this month? Compare spend, ROAS, and CPA.')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Show me the top 10 campaigns by spend for FOCL in the last 30 days."</span><button class="prompt-copy" onclick="copyPrompt(this, 'Show me the top 10 campaigns by spend for FOCL in the last 30 days.')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Which Facebook ad sets are getting the best ROAS for Sunny Within this month?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'Which Facebook ad sets are getting the best ROAS for Sunny Within this month?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"What's our total ad spend across all channels for The Fidget Games last quarter?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'What\'s our total ad spend across all channels for The Fidget Games last quarter?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Which Facebook ads are driving the most new customer revenue for Stars & Honey this month? Sort by NC ROAS."</span><button class="prompt-copy" onclick="copyPrompt(this, 'Which Facebook ads are driving the most new customer revenue for Stars & Honey this month? Sort by NC ROAS.')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Show me every Facebook ad for FOCL with its NC CPA — I want to know which ones are actually acquiring new customers efficiently."</span><button class="prompt-copy" onclick="copyPrompt(this, 'Show me every Facebook ad for FOCL with its NC CPA — I want to know which ones are actually acquiring new customers efficiently.')">Copy</button></div>
+      </div>
+      <div class="tool-tags">
+        <span class="tool-tag">tw_get_channel_performance</span>
+        <span class="tool-tag">tw_get_campaign_performance</span>
+        <span class="tool-tag">tw_get_ad_spend_overview</span>
+        <span class="tool-tag">tw_get_ad_set_performance</span>
+        <span class="tool-tag">tw_get_facebook_ad_performance</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Creative Intelligence -->
+  <div class="accordion">
+    <button class="accordion-trigger" onclick="toggleAccordion(this)">
+      <span class="acc-emoji">🎨</span>
+      <div class="acc-title-wrap">
+        <div class="acc-title">Creative Intelligence</div>
+        <div class="acc-sub">Which ads are working, which are tired, and what format wins</div>
+      </div>
+      <span class="acc-arrow">▾</span>
+    </button>
+    <div class="accordion-body">
+      <p class="acc-desc">Find your best-performing creatives by ROAS, CTR, or revenue. Spot ads that are losing steam before they drain budget. Compare how different formats perform — video vs image, or Facebook vs TikTok.</p>
+      <div class="prompt-grid">
+        <div class="prompt-row"><span class="prompt-text">"What are the top 5 creatives by ROAS for Sophie Grace on Facebook in the last 30 days?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'What are the top 5 creatives by ROAS for Sophie Grace on Facebook in the last 30 days?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Are any of our creatives showing signs of fatigue for Stars & Honey? Check the last 60 days."</span><button class="prompt-copy" onclick="copyPrompt(this, 'Are any of our creatives showing signs of fatigue for Stars & Honey? Check the last 60 days.')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Do videos or images perform better for FOCL on TikTok?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'Do videos or images perform better for FOCL on TikTok?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Compare creative performance across Facebook, Google, and TikTok for Sunny Within this month."</span><button class="prompt-copy" onclick="copyPrompt(this, 'Compare creative performance across Facebook, Google, and TikTok for Sunny Within this month.')">Copy</button></div>
+      </div>
+      <div class="tool-tags">
+        <span class="tool-tag">tw_get_creative_performance</span>
+        <span class="tool-tag">tw_get_creative_trends</span>
+        <span class="tool-tag">tw_get_creative_comparison</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Customer Insights -->
+  <div class="accordion">
+    <button class="accordion-trigger" onclick="toggleAccordion(this)">
+      <span class="acc-emoji">👥</span>
+      <div class="acc-title-wrap">
+        <div class="acc-title">Customer Insights</div>
+        <div class="acc-sub">Who's buying, who's coming back, and what they're spending</div>
+      </div>
+      <span class="acc-arrow">▾</span>
+    </button>
+    <div class="accordion-body">
+      <p class="acc-desc">Understand the split between new and returning customers, track how much it costs to acquire a customer, see which products drive the most revenue, and analyse whether customers acquired months ago are still buying today. You can also see how revenue is trending over time, how quickly customers come back for a second purchase, and which geographies are growing fastest.</p>
+      <div class="prompt-grid">
+        <div class="prompt-row"><span class="prompt-text">"What's the new vs returning customer split for The Fidget Games this month? And what's our CAC?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'What\'s the new vs returning customer split for The Fidget Games this month? And what\'s our CAC?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"What are the top 10 products by revenue for FOCL in the last 90 days?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'What are the top 10 products by revenue for FOCL in the last 90 days?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Show me cohort retention for Stars & Honey — are customers we acquired 6 months ago still buying?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'Show me cohort retention for Stars & Honey — are customers we acquired 6 months ago still buying?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"How much revenue is coming from new customers vs returning customers for Sophie Grace this quarter?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'How much revenue is coming from new customers vs returning customers for Sophie Grace this quarter?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Show me revenue trend week by week for FOCL in the last 90 days — are we growing or plateauing?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'Show me revenue trend week by week for FOCL in the last 90 days — are we growing or plateauing?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"What percentage of Stars & Honey customers buy again? How many days on average between their first and second order?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'What percentage of Stars & Honey customers buy again? How many days on average between their first and second order?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Which countries and US states are driving the most revenue for Sophie Grace this month?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'Which countries and US states are driving the most revenue for Sophie Grace this month?')">Copy</button></div>
+      </div>
+      <div class="tool-tags">
+        <span class="tool-tag">tw_get_customer_metrics</span>
+        <span class="tool-tag">tw_get_revenue_breakdown</span>
+        <span class="tool-tag">tw_get_cohort_analysis</span>
+        <span class="tool-tag">tw_get_revenue_trends</span>
+        <span class="tool-tag">tw_get_repurchase_analysis</span>
+        <span class="tool-tag">tw_get_geographic_breakdown</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Discounts & Promotions -->
+  <div class="accordion">
+    <button class="accordion-trigger" onclick="toggleAccordion(this)">
+      <span class="acc-emoji">🏷️</span>
+      <div class="acc-title-wrap">
+        <div class="acc-title">Discounts & Promotions</div>
+        <div class="acc-sub">Which codes are working — and who's actually using them</div>
+      </div>
+      <span class="acc-arrow">▾</span>
+    </button>
+    <div class="accordion-body">
+      <p class="acc-desc">See which discount codes are actually pulling their weight — revenue driven, orders placed, and average discount amount. Crucially, you can see whether a code is bringing in new customers or mostly being used by people who would have bought anyway. You can also compare average order value for discounted vs full-price orders.</p>
+      <div class="prompt-grid">
+        <div class="prompt-row"><span class="prompt-text">"Which discount codes drove the most revenue for FOCL this month?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'Which discount codes drove the most revenue for FOCL this month?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"What's the average order value for customers using a discount vs paying full price for Stars & Honey?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'What\'s the average order value for customers using a discount vs paying full price for Stars & Honey?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Are our discount codes bringing in new customers or mostly being used by people who'd have bought anyway for Sunny Within?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'Are our discount codes bringing in new customers or mostly being used by people who\'d have bought anyway for Sunny Within?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Show me how each discount code performed for Sophie Grace in the last 30 days — revenue, orders, and average discount amount."</span><button class="prompt-copy" onclick="copyPrompt(this, 'Show me how each discount code performed for Sophie Grace in the last 30 days — revenue, orders, and average discount amount.')">Copy</button></div>
+      </div>
+      <div class="tool-tags">
+        <span class="tool-tag">tw_get_discount_performance</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Subscriptions -->
+  <div class="accordion">
+    <button class="accordion-trigger" onclick="toggleAccordion(this)">
+      <span class="acc-emoji">🔄</span>
+      <div class="acc-title-wrap">
+        <div class="acc-title">Subscription Business</div>
+        <div class="acc-sub">MRR, churn, subscriber retention, and which products drive recurring revenue</div>
+      </div>
+      <span class="acc-arrow">▾</span>
+    </button>
+    <div class="accordion-body">
+      <p class="acc-desc">Track monthly recurring revenue, see how many subscribers you're gaining and losing, understand churn trends over time, and find out which products have the healthiest subscription retention.</p>
+      <div class="prompt-grid">
+        <div class="prompt-row"><span class="prompt-text">"Give me a subscription health overview for FOCL — MRR, active subscribers, and churn rate."</span><button class="prompt-copy" onclick="copyPrompt(this, 'Give me a subscription health overview for FOCL — MRR, active subscribers, and churn rate.')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"How has churn trended month by month for Stars & Honey over the last 6 months?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'How has churn trended month by month for Stars & Honey over the last 6 months?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Which products have the highest subscription churn for FOCL?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'Which products have the highest subscription churn for FOCL?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Compare subscription revenue this quarter vs last quarter for Sunny Within."</span><button class="prompt-copy" onclick="copyPrompt(this, 'Compare subscription revenue this quarter vs last quarter for Sunny Within.')">Copy</button></div>
+      </div>
+      <div class="tool-tags">
+        <span class="tool-tag">tw_get_subscription_overview</span>
+        <span class="tool-tag">tw_get_subscription_trends</span>
+        <span class="tool-tag">tw_get_subscription_cohorts</span>
+        <span class="tool-tag">tw_get_subscription_product_performance</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Amazon -->
+  <div class="accordion">
+    <button class="accordion-trigger" onclick="toggleAccordion(this)">
+      <span class="acc-emoji">📦</span>
+      <div class="acc-title-wrap">
+        <div class="acc-title">Amazon Advertising</div>
+        <div class="acc-sub">Sponsored Products, Brands, and Display performance by campaign and product</div>
+      </div>
+      <span class="acc-arrow">▾</span>
+    </button>
+    <div class="accordion-body">
+      <p class="acc-desc">See how your Amazon ad campaigns are performing, broken down by Sponsored Products, Sponsored Brands, and Sponsored Display. Drill into individual products (ASINs) to see which ones are profitable and which aren't pulling their weight.</p>
+      <div class="prompt-grid">
+        <div class="prompt-row"><span class="prompt-text">"Show me Amazon campaign performance for The Fidget Games this month — sorted by ROAS."</span><button class="prompt-copy" onclick="copyPrompt(this, 'Show me Amazon campaign performance for The Fidget Games this month — sorted by ROAS.')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Which Sponsored Products campaigns have the worst ACoS for Sophie Grace?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'Which Sponsored Products campaigns have the worst ACoS for Sophie Grace?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"What's the ad-attributed revenue by product (ASIN) for FOCL in the last 30 days?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'What\'s the ad-attributed revenue by product (ASIN) for FOCL in the last 30 days?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Compare ACoS this month vs last month for The Fidget Games Amazon campaigns."</span><button class="prompt-copy" onclick="copyPrompt(this, 'Compare ACoS this month vs last month for The Fidget Games Amazon campaigns.')">Copy</button></div>
+      </div>
+      <div class="tool-tags">
+        <span class="tool-tag">tw_get_amazon_ad_campaigns</span>
+        <span class="tool-tag">tw_get_amazon_product_performance</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Attribution -->
+  <div class="accordion">
+    <button class="accordion-trigger" onclick="toggleAccordion(this)">
+      <span class="acc-emoji">🔍</span>
+      <div class="acc-title-wrap">
+        <div class="acc-title">Attribution & Tracking</div>
+        <div class="acc-sub">Where sales really come from — the full customer journey</div>
+      </div>
+      <span class="acc-arrow">▾</span>
+    </button>
+    <div class="accordion-body">
+      <p class="acc-desc">Understand the difference between what platforms claim they drove vs what Triple Whale actually measured. See the full sequence of touchpoints that led to a purchase, and track how your spend and ROAS are trending over time.</p>
+      <div class="prompt-grid">
+        <div class="prompt-row"><span class="prompt-text">"How does Triple Whale's ROAS compare to what Facebook is reporting for Sunny Within this month?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'How does Triple Whale\'s ROAS compare to what Facebook is reporting for Sunny Within this month?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Show me the customer journey breakdown for FOCL — what touchpoints are customers hitting before they buy?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'Show me the customer journey breakdown for FOCL — what touchpoints are customers hitting before they buy?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"How has ROAS trended week by week for Stars & Honey over the last 90 days?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'How has ROAS trended week by week for Stars & Honey over the last 90 days?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Compare first-click vs last-click attribution for Sophie Grace — which channels look different?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'Compare first-click vs last-click attribution for Sophie Grace — which channels look different?')">Copy</button></div>
+      </div>
+      <div class="tool-tags">
+        <span class="tool-tag">tw_get_attribution_comparison</span>
+        <span class="tool-tag">tw_get_customer_journeys</span>
+        <span class="tool-tag">tw_get_spend_trends</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. Website & Funnel -->
+  <div class="accordion">
+    <button class="accordion-trigger" onclick="toggleAccordion(this)">
+      <span class="acc-emoji">🌐</span>
+      <div class="acc-title-wrap">
+        <div class="acc-title">Website & Funnel</div>
+        <div class="acc-sub">Where visitors drop off — and which pages and channels drive real traffic</div>
+      </div>
+      <span class="acc-arrow">▾</span>
+    </button>
+    <div class="accordion-body">
+      <p class="acc-desc">See exactly how many visitors make it from your site all the way through to a purchase — and where the biggest drop-offs happen. Find your highest-traffic landing pages, and understand session quality by channel: bounce rate, pages per session, and time on site. Useful for diagnosing whether a drop in revenue is a traffic problem or a conversion problem.</p>
+      <div class="prompt-grid">
+        <div class="prompt-row"><span class="prompt-text">"Show me the conversion funnel for Stars & Honey this month — how many sessions turn into add-to-carts, checkouts, and purchases?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'Show me the conversion funnel for Stars & Honey this month — how many sessions turn into add-to-carts, checkouts, and purchases?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Which landing pages are getting the most traffic for FOCL in the last 30 days?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'Which landing pages are getting the most traffic for FOCL in the last 30 days?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"What's our bounce rate by channel for Sophie Grace this month? Which channels bring the most engaged visitors?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'What\'s our bounce rate by channel for Sophie Grace this month? Which channels bring the most engaged visitors?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Where are people dropping off in the checkout funnel for Sunny Within? Compare Facebook vs Google traffic."</span><button class="prompt-copy" onclick="copyPrompt(this, 'Where are people dropping off in the checkout funnel for Sunny Within? Compare Facebook vs Google traffic.')">Copy</button></div>
+      </div>
+      <div class="tool-tags">
+        <span class="tool-tag">tw_get_conversion_funnel</span>
+        <span class="tool-tag">tw_get_top_pages</span>
+        <span class="tool-tag">tw_get_web_sessions</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. Alerts -->
+  <div class="accordion">
+    <button class="accordion-trigger" onclick="toggleAccordion(this)">
+      <span class="acc-emoji">🚨</span>
+      <div class="acc-title-wrap">
+        <div class="acc-title">Alerts & Monitoring</div>
+        <div class="acc-sub">Catch underperforming channels and wasted spend before it adds up</div>
+      </div>
+      <span class="acc-arrow">▾</span>
+    </button>
+    <div class="accordion-body">
+      <p class="acc-desc">Run a quick health check across all your channels. By default, this flags any channel with a ROAS below 1.0 (losing money) or channels that are spending but getting zero conversions. You can also set custom thresholds for any metric.</p>
+      <div class="prompt-grid">
+        <div class="prompt-row"><span class="prompt-text">"Are any channels losing money for Sunny Within this month?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'Are any channels losing money for Sunny Within this month?')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Check for any channels with ROAS below 2 for The Fidget Games in the last 30 days."</span><button class="prompt-copy" onclick="copyPrompt(this, 'Check for any channels with ROAS below 2 for The Fidget Games in the last 30 days.')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Flag any channels spending money but driving zero conversions for FOCL this week."</span><button class="prompt-copy" onclick="copyPrompt(this, 'Flag any channels spending money but driving zero conversions for FOCL this week.')">Copy</button></div>
+        <div class="prompt-row"><span class="prompt-text">"Run a full performance health check for Stars & Honey — flag anything with CPA over $50."</span><button class="prompt-copy" onclick="copyPrompt(this, 'Run a full performance health check for Stars & Honey — flag anything with CPA over $50.')">Copy</button></div>
+      </div>
+      <div class="tool-tags">
+        <span class="tool-tag">tw_get_metric_alerts</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SECTION 3 — HOW TO USE IT
+═══════════════════════════════════════════════ -->
+<section class="section" id="section-howto">
+<div class="content">
+
+  <div class="section-label">How To Use It</div>
+  <h2>Best Practices</h2>
+  <p class="section-intro">You don't need special commands or technical knowledge. Just talk to Claude like you'd talk to an analyst. Here's how to get the most out of it.</p>
+
+  <h3 style="margin-bottom:14px;">Vague vs specific — the difference it makes</h3>
+  <table class="example-table">
+    <thead>
+      <tr>
+        <th>❌ Too vague</th>
+        <th>✅ Much better</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>"How are ads doing?"</td>
+        <td>"How are Facebook and Google ads performing for Sunny Within this month? Show me ROAS and CPA."</td>
+      </tr>
+      <tr>
+        <td>"Show me customers"</td>
+        <td>"What's the new vs returning customer split for The Fidget Games in the last 30 days?"</td>
+      </tr>
+      <tr>
+        <td>"Check creatives"</td>
+        <td>"Are any of our TikTok creatives showing fatigue for FOCL in the last 60 days?"</td>
+      </tr>
+      <tr>
+        <td>"How's revenue?"</td>
+        <td>"How did Sophie Grace's revenue compare this month vs last month?"</td>
+      </tr>
+      <tr>
+        <td>"Check Facebook"</td>
+        <td>"Show me which Facebook ads are driving the most new customer revenue for [store] this month, sorted by NC ROAS."</td>
+      </tr>
+      <tr>
+        <td>"How's the website?"</td>
+        <td>"Show me the conversion funnel for [store] this month — where are visitors dropping off between landing and purchase?"</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+
+  <h3 style="margin-bottom:18px;">7 tips that make a real difference</h3>
+  <ul class="practices-list">
+    <li class="practice-item">
+      <div class="practice-num">1</div>
+      <div class="practice-text"><strong>Always name the store.</strong> If you have multiple stores set up, Claude needs to know which one you mean. Use the display name you set up (e.g. "Sunny Within" or "FOCL").</div>
+    </li>
+    <li class="practice-item">
+      <div class="practice-num">2</div>
+      <div class="practice-text"><strong>Always include a time period.</strong> "This month", "last 30 days", "Q1", "year to date" — the more specific, the better. Without one, Claude will default to the last 30 days.</div>
+    </li>
+    <li class="practice-item">
+      <div class="practice-num">3</div>
+      <div class="practice-text"><strong>Start broad, then drill down.</strong> Ask for a business summary first. See something interesting? Then ask: "Can you break that down by channel?" or "Which campaigns are driving that?" Claude remembers the whole conversation.</div>
+    </li>
+    <li class="practice-item">
+      <div class="practice-num">4</div>
+      <div class="practice-text"><strong>Compare periods whenever possible.</strong> A number on its own tells you less than a number vs last month or vs last year. Ask for comparisons regularly — they surface problems and wins you'd otherwise miss.</div>
+    </li>
+    <li class="practice-item">
+      <div class="practice-num">5</div>
+      <div class="practice-text"><strong>Trust Triple Whale's ROAS over platform ROAS.</strong> Facebook and Google both claim credit for more sales than they actually drove. Triple Whale's pixel tracks the full picture. If the numbers differ, the TW number is more accurate.</div>
+    </li>
+    <li class="practice-item">
+      <div class="practice-num">6</div>
+      <div class="practice-text"><strong>Check for creative fatigue weekly.</strong> Ads naturally wear out — people stop clicking after seeing them too many times. Make creative fatigue a standing part of your weekly review before you decide on budget changes.</div>
+    </li>
+    <li class="practice-item">
+      <div class="practice-num">7</div>
+      <div class="practice-text"><strong>Use alerts as your Monday morning check-in.</strong> Ask "are any channels losing money this week?" at the start of each week. It takes 10 seconds and can save you from letting wasted spend run all week unnoticed.</div>
+    </li>
+    <li class="practice-item">
+      <div class="practice-num">8</div>
+      <div class="practice-text"><strong>Use NC ROAS to find your real growth ads.</strong> Overall ROAS includes returning customers who would have bought anyway. NC ROAS tells you which ads are actually growing your customer base. An ad with a great overall ROAS but terrible NC ROAS is mostly just retargeting people who already know you — not building the business.</div>
+    </li>
+  </ul>
+
+  <hr class="divider">
+
+  <h3 style="margin-bottom:6px;">40+ ready-to-use prompts</h3>
+  <p style="font-size:15px; color:var(--text-muted); margin-bottom:4px;">Click any prompt to copy it straight to your clipboard.</p>
+
+  <div class="bank-section-label">Daily check-in</div>
+  <div class="prompt-bank-grid">
+    <button class="bank-pill" onclick="copyBank(this, 'Are any of my channels losing money today?')"><span class="bank-pill-icon">🚨</span>Are any of my channels losing money today?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'Give me a quick business summary for [store] — revenue and ROAS vs yesterday.')"><span class="bank-pill-icon">📊</span>Give me a quick business summary for [store] — revenue and ROAS vs yesterday.</button>
+    <button class="bank-pill" onclick="copyBank(this, 'What\'s our ad spend and ROAS today vs the same day last week for [store]?')"><span class="bank-pill-icon">📣</span>What's our ad spend and ROAS today vs the same day last week for [store]?</button>
+  </div>
+
+  <div class="bank-section-label">Weekly review</div>
+  <div class="prompt-bank-grid">
+    <button class="bank-pill" onclick="copyBank(this, 'Give me a full business health summary for [store] for the last 7 days vs the 7 days before.')"><span class="bank-pill-icon">📈</span>Give me a full business health summary for [store] for the last 7 days vs the 7 days before.</button>
+    <button class="bank-pill" onclick="copyBank(this, 'Which channels had the best and worst ROAS for [store] this week?')"><span class="bank-pill-icon">📣</span>Which channels had the best and worst ROAS for [store] this week?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'Are any creatives showing fatigue for [store] in the last 14 days?')"><span class="bank-pill-icon">🎨</span>Are any creatives showing fatigue for [store] in the last 14 days?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'What were our top 5 campaigns by ROAS for [store] this week?')"><span class="bank-pill-icon">🏆</span>What were our top 5 campaigns by ROAS for [store] this week?</button>
+  </div>
+
+  <div class="bank-section-label">Ad optimisation</div>
+  <div class="prompt-bank-grid">
+    <button class="bank-pill" onclick="copyBank(this, 'Which Facebook ad sets are spending the most with the lowest ROAS for [store]?')"><span class="bank-pill-icon">💸</span>Which Facebook ad sets are spending the most with the lowest ROAS for [store]?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'Compare TikTok and Facebook ROAS for [store] in the last 30 days.')"><span class="bank-pill-icon">⚡</span>Compare TikTok and Facebook ROAS for [store] in the last 30 days.</button>
+    <button class="bank-pill" onclick="copyBank(this, 'What\'s the cost per acquisition across all channels for [store] this month?')"><span class="bank-pill-icon">🎯</span>What's the cost per acquisition across all channels for [store] this month?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'How does Triple Whale\'s attributed revenue compare to what Google is reporting for [store]?')"><span class="bank-pill-icon">🔍</span>How does Triple Whale's attributed revenue compare to what Google is reporting for [store]?</button>
+  </div>
+
+  <div class="bank-section-label">Creative review</div>
+  <div class="prompt-bank-grid">
+    <button class="bank-pill" onclick="copyBank(this, 'What are the top 10 creatives by ROAS for [store] on Facebook in the last 30 days?')"><span class="bank-pill-icon">🏆</span>What are the top 10 creatives by ROAS for [store] on Facebook in the last 30 days?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'Do image or video ads perform better for [store] on TikTok?')"><span class="bank-pill-icon">🎬</span>Do image or video ads perform better for [store] on TikTok?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'Which creatives have the highest CTR for [store] across all platforms this month?')"><span class="bank-pill-icon">👆</span>Which creatives have the highest CTR for [store] across all platforms this month?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'Show me creative performance broken down by ad type for [store] in the last 60 days.')"><span class="bank-pill-icon">📊</span>Show me creative performance broken down by ad type for [store] in the last 60 days.</button>
+  </div>
+
+  <div class="bank-section-label">Customer insight</div>
+  <div class="prompt-bank-grid">
+    <button class="bank-pill" onclick="copyBank(this, 'What\'s the new vs returning customer split and CAC for [store] this month?')"><span class="bank-pill-icon">👥</span>What's the new vs returning customer split and CAC for [store] this month?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'What are the top 10 products by revenue for [store] in the last 90 days?')"><span class="bank-pill-icon">🛒</span>What are the top 10 products by revenue for [store] in the last 90 days?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'Show me 6-month cohort retention for [store] — are customers sticking around?')"><span class="bank-pill-icon">🔄</span>Show me 6-month cohort retention for [store] — are customers sticking around?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'How much revenue came from new customers vs returning for [store] this quarter?')"><span class="bank-pill-icon">💰</span>How much revenue came from new customers vs returning for [store] this quarter?</button>
+  </div>
+
+  <div class="bank-section-label">Subscription health</div>
+  <div class="prompt-bank-grid">
+    <button class="bank-pill" onclick="copyBank(this, 'Give me a subscription overview for [store] — MRR, active subscribers, and churn rate.')"><span class="bank-pill-icon">📋</span>Give me a subscription overview for [store] — MRR, active subscribers, and churn rate.</button>
+    <button class="bank-pill" onclick="copyBank(this, 'How has monthly churn trended for [store] over the last 6 months?')"><span class="bank-pill-icon">📉</span>How has monthly churn trended for [store] over the last 6 months?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'Which products have the highest subscription churn rate for [store]?')"><span class="bank-pill-icon">⚠️</span>Which products have the highest subscription churn rate for [store]?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'Compare subscription MRR this quarter vs last quarter for [store].')"><span class="bank-pill-icon">📊</span>Compare subscription MRR this quarter vs last quarter for [store].</button>
+  </div>
+
+  <div class="bank-section-label">Problem diagnosis</div>
+  <div class="prompt-bank-grid">
+    <button class="bank-pill" onclick="copyBank(this, 'Revenue dropped this week vs last week for [store] — help me figure out why. Check channels, campaigns, and new vs returning customers.')"><span class="bank-pill-icon">🔎</span>Revenue dropped this week for [store] — help me figure out why.</button>
+    <button class="bank-pill" onclick="copyBank(this, 'Flag any channels with ROAS below 1.5 for [store] in the last 30 days.')"><span class="bank-pill-icon">🚨</span>Flag any channels with ROAS below 1.5 for [store] in the last 30 days.</button>
+    <button class="bank-pill" onclick="copyBank(this, 'We increased ad spend last month for [store] — did it actually drive more revenue? Compare spend and revenue month over month.')"><span class="bank-pill-icon">💡</span>We increased spend last month for [store] — did it drive more revenue?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'Is our CPA trending up or down over the last 90 days for [store]? Show me weekly.')"><span class="bank-pill-icon">📈</span>Is our CPA trending up or down over the last 90 days for [store]?</button>
+  </div>
+
+  <div class="bank-section-label">New customer growth</div>
+  <div class="prompt-bank-grid">
+    <button class="bank-pill" onclick="copyBank(this, 'Show me the top 10 Facebook ads for [store] ranked by NC ROAS — I want to find which ads are best at acquiring new customers.')"><span class="bank-pill-icon">🆕</span>Top Facebook ads for [store] ranked by NC ROAS.</button>
+    <button class="bank-pill" onclick="copyBank(this, 'What percentage of [store] customers make a second purchase, and how many days on average between their first and second order?')"><span class="bank-pill-icon">🔄</span>What % of [store] customers repurchase, and how fast?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'Which countries and US states are driving the most revenue for [store] this month? Show me orders and AOV by region.')"><span class="bank-pill-icon">🌍</span>Which regions drive the most revenue for [store]?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'Are our discount codes for [store] bringing in new customers or mostly rewarding existing ones? Show me the new vs returning split by code.')"><span class="bank-pill-icon">🏷️</span>Are [store] discount codes acquiring new customers or rewarding existing ones?</button>
+  </div>
+
+  <div class="bank-section-label">Website & funnel</div>
+  <div class="prompt-bank-grid">
+    <button class="bank-pill" onclick="copyBank(this, 'Show me the conversion funnel for [store] this month — sessions, add-to-carts, checkouts, and purchases. Where is the biggest drop-off?')"><span class="bank-pill-icon">🌐</span>Show me the conversion funnel for [store] — where are people dropping off?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'Which landing pages are getting the most traffic for [store] in the last 30 days?')"><span class="bank-pill-icon">📄</span>Which landing pages get the most traffic for [store]?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'What\'s the bounce rate by channel for [store] this month? Which channels bring the most engaged visitors?')"><span class="bank-pill-icon">📉</span>Bounce rate by channel for [store] — which channels bring quality traffic?</button>
+    <button class="bank-pill" onclick="copyBank(this, 'Compare the add-to-cart rate for Facebook vs Google traffic for [store] this month. Which channel converts better on-site?')"><span class="bank-pill-icon">🛒</span>Does Facebook or Google traffic convert better on-site for [store]?</button>
+  </div>
+
+</div>
+</section>
+
+<script>
+  function showTab(tab) {
+    // Hide all sections
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+    // Show selected
+    const section = document.getElementById('section-' + tab);
+    if (section) section.classList.add('active');
+
+    // Activate button
+    const btns = document.querySelectorAll('.tab-btn');
+    const map = { capabilities: 0, howto: 1, install: 2 };
+    if (btns[map[tab]]) btns[map[tab]].classList.add('active');
+
+    // Scroll to top of content
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleAccordion(trigger) {
+    const body = trigger.nextElementSibling;
+    const isOpen = trigger.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.accordion-trigger').forEach(t => t.classList.remove('open'));
+    document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+
+    // Open this one if it wasn't open
+    if (!isOpen) {
+      trigger.classList.add('open');
+      body.classList.add('open');
+    }
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg || 'Copied!';
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+  }
+
+  function copyCode(btn) {
+    const pre = btn.closest('.code-block').querySelector('pre');
+    navigator.clipboard.writeText(pre.textContent.trim()).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  function copyPrompt(btn, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      showToast('Prompt copied!');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  function copyBank(btn, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.classList.add('copied');
+      showToast('Prompt copied!');
+      setTimeout(() => btn.classList.remove('copied'), 2000);
+    });
+  }
+</script>
+
+</body>
+</html>
