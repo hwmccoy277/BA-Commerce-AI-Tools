@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BA Commerce AI Connector</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -36,11 +36,196 @@
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 16px;
     line-height: 1.6;
     color: var(--text);
     background: var(--bg);
+  }
+
+  /* ─────────────────────────────────────────────
+     HERO
+  ───────────────────────────────────────────── */
+  .hero {
+    background: var(--navy);
+    color: white;
+    position: relative;
+    overflow: hidden;
+    padding: 0 24px 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* subtle grid texture */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(99,102,241,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99,102,241,.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+  }
+
+  /* glow blob */
+  .hero-glow {
+    position: absolute;
+    top: -120px;
+    right: -120px;
+    width: 560px;
+    height: 560px;
+    background: radial-gradient(circle, rgba(99,102,241,.22) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-glow-2 {
+    position: absolute;
+    bottom: 60px;
+    left: -80px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(16,185,129,.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-logobar {
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 0 0;
+    animation: fadeUp .4s ease both;
+  }
+  .hero-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-logo-mark {
+    width: 35px;
+    height: 35px;
+    background: var(--accent);
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+    box-shadow: 0 0 12px rgba(99,102,241,.4);
+  }
+  .hero-logo-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #94a3b8;
+    letter-spacing: .01em;
+  }
+  .hero-logo-text strong {
+    color: white;
+    font-weight: 700;
+  }
+  .hero-logo-sep {
+    color: #334155;
+    margin: 0 2px;
+  }
+
+  .hero-inner {
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 28px 0 40px;
+  }
+
+  .hero-headline {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -.01em;
+    margin-bottom: 16px;
+    color: white;
+    animation: fadeUp .6s .1s ease both;
+  }
+
+  .hero-sub {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: #94a3b8;
+    max-width: 560px;
+    line-height: 1.65;
+    margin-bottom: 56px;
+    animation: fadeUp .6s .2s ease both;
+  }
+
+  /* BEFORE / AFTER */
+  .before-after {
+    display: grid;
+    grid-template-columns: 1fr 56px 1fr;
+    gap: 0;
+    animation: fadeUp .6s .3s ease both;
+  }
+  .ba-panel {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: var(--radius);
+    padding: 22px 24px 24px;
+  }
+  .ba-panel.after-panel {
+    background: rgba(99,102,241,.1);
+    border-color: rgba(99,102,241,.28);
+  }
+  .ba-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .ba-label.before { background: rgba(239,68,68,.15); color: #fca5a5; }
+  .ba-label.after { background: rgba(99,102,241,.25); color: var(--accent-light); }
+
+  .ba-items { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .ba-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 13.5px;
+    color: #94a3b8;
+    line-height: 1.5;
+  }
+  .ba-item-icon { flex-shrink: 0; font-size: 14px; margin-top: 1px; }
+  .ba-item-text { flex: 1; }
+  .after-panel .ba-item { color: #a5b4fc; }
+  .after-panel .ba-item strong { color: white; font-weight: 500; }
+
+  .ba-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ba-arrow {
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    box-shadow: 0 0 20px rgba(99,102,241,.5);
+    flex-shrink: 0;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(3px); }
   }
 
   /* ── Header ── */
@@ -49,30 +234,7 @@
     color: white;
     padding: 48px 24px 40px;
     text-align: center;
-  }
-  .site-header .badge {
-    display: inline-block;
-    background: rgba(99,102,241,.25);
-    color: var(--accent-light);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    padding: 4px 12px;
-    border-radius: 999px;
-    margin-bottom: 16px;
-  }
-  .site-header h1 {
-    font-size: clamp(24px, 5vw, 40px);
-    font-weight: 800;
-    letter-spacing: -.02em;
-    margin-bottom: 12px;
-  }
-  .site-header p {
-    font-size: 17px;
-    color: #94a3b8;
-    max-width: 560px;
-    margin: 0 auto;
+    display: none; /* replaced by hero */
   }
 
   /* ── Sticky nav ── */
@@ -511,24 +673,93 @@
   }
   .divider { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .4; }
+  }
+
   /* ── Responsive ── */
-  @media (max-width: 640px) {
+  @media (max-width: 700px) {
+    .before-after { grid-template-columns: 1fr; grid-template-rows: auto auto auto; }
+    .ba-divider { padding: 10px 0; }
+    .ba-arrow { transform: rotate(90deg); }
     .content { padding: 32px 16px 60px; }
     .requirements { grid-template-columns: 1fr; }
     .tab-btn { padding: 14px 14px 12px; font-size: 13px; }
     .example-table { font-size: 13px; }
     .example-table td, .example-table th { padding: 9px 12px; }
     .prompt-bank-grid { grid-template-columns: 1fr; }
+    .hero { padding: 0 20px; }
+    .hero-headline { font-size: 34px; }
+    .hero-sub { font-size: 14px; }
   }
 </style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="badge">Marketer's Guide</div>
-  <h1>BA Commerce AI Data Connector</h1>
-  <p>Ask questions about your store's performance directly in Claude. No dashboards, no spreadsheets — just answers.</p>
-</header>
+<!-- ════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+
+  <!-- LOGO BAR -->
+  <div class="hero-logobar">
+    <div class="hero-logo">
+      <div class="hero-logo-mark">⚡</div>
+      <div class="hero-logo-text">
+        <strong>BA Commerce</strong><span class="hero-logo-sep"> · </span>AI Data Connector
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="hero-inner">
+
+    <h1 class="hero-headline">
+      No dashboards, no spreadsheets —<br>just answers right in Claude.
+    </h1>
+
+    <p class="hero-sub">
+      Stop opening six tabs to answer one question. The BA Commerce AI Connector plugs Triple Whale directly into Claude — so you can just ask, in plain English, and get a real answer. No exports. No waiting.
+    </p>
+
+    <!-- BEFORE / AFTER -->
+    <div class="before-after">
+      <div class="ba-panel">
+        <div class="ba-label before">⏱ Before</div>
+        <ul class="ba-items">
+          <li class="ba-item"><span class="ba-item-icon">😮‍💨</span><span class="ba-item-text">Log into Triple Whale. Log into Meta Ads Manager. Open Shopify. Pull up a spreadsheet.</span></li>
+          <li class="ba-item"><span class="ba-item-icon">📋</span><span class="ba-item-text">Manually export data, paste into sheets, build formulas.</span></li>
+          <li class="ba-item"><span class="ba-item-icon">🤔</span><span class="ba-item-text">Spend 20 minutes finding an answer that leads to three more questions.</span></li>
+          <li class="ba-item"><span class="ba-item-icon">📉</span><span class="ba-item-text">By the time you have the answer, the moment to act has passed.</span></li>
+        </ul>
+      </div>
+
+      <div class="ba-divider">
+        <div class="ba-arrow">→</div>
+      </div>
+
+      <div class="ba-panel after-panel">
+        <div class="ba-label after">⚡ After</div>
+        <ul class="ba-items">
+          <li class="ba-item"><span class="ba-item-icon">💬</span><span class="ba-item-text"><strong>Open Claude. Ask your question.</strong> That's it.</span></li>
+          <li class="ba-item"><span class="ba-item-icon">🎯</span><span class="ba-item-text"><strong>Get a real answer in seconds</strong> — with context, not just numbers.</span></li>
+          <li class="ba-item"><span class="ba-item-icon">🔍</span><span class="ba-item-text"><strong>Drill down naturally:</strong> "Why?" → "Which campaigns?" → "What should I do?"</span></li>
+          <li class="ba-item"><span class="ba-item-icon">🚀</span><span class="ba-item-text"><strong>Spot problems and opportunities</strong> before your competitors do.</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</section>
 
 <nav class="tab-nav">
   <div class="tab-nav-inner">
@@ -832,7 +1063,7 @@ npm run build</pre>
       <span class="acc-arrow">▾</span>
     </button>
     <div class="accordion-body">
-      <p class="acc-desc">Understand the split between new and returning customers, track how much it costs to acquire a customer, see which products drive the most revenue, and analyse whether customers acquired months ago are still buying today. You can also see how revenue is trending over time, how quickly customers come back for a second purchase, and which geographies are growing fastest.</p>
+      <p class="acc-desc">Understand the split between new and returning customers, track how much it costs to acquire a customer, see which products drive the most revenue, and analyse whether customers acquired months ago are still buying today.</p>
       <div class="prompt-grid">
         <div class="prompt-row"><span class="prompt-text">"What's the new vs returning customer split for The Fidget Games this month? And what's our CAC?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'What\'s the new vs returning customer split for The Fidget Games this month? And what\'s our CAC?')">Copy</button></div>
         <div class="prompt-row"><span class="prompt-text">"What are the top 10 products by revenue for FOCL in the last 90 days?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'What are the top 10 products by revenue for FOCL in the last 90 days?')">Copy</button></div>
@@ -864,7 +1095,7 @@ npm run build</pre>
       <span class="acc-arrow">▾</span>
     </button>
     <div class="accordion-body">
-      <p class="acc-desc">See which discount codes are actually pulling their weight — revenue driven, orders placed, and average discount amount. Crucially, you can see whether a code is bringing in new customers or mostly being used by people who would have bought anyway. You can also compare average order value for discounted vs full-price orders.</p>
+      <p class="acc-desc">See which discount codes are actually pulling their weight — revenue driven, orders placed, and average discount amount. Crucially, you can see whether a code is bringing in new customers or mostly being used by people who would have bought anyway.</p>
       <div class="prompt-grid">
         <div class="prompt-row"><span class="prompt-text">"Which discount codes drove the most revenue for FOCL this month?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'Which discount codes drove the most revenue for FOCL this month?')">Copy</button></div>
         <div class="prompt-row"><span class="prompt-text">"What's the average order value for customers using a discount vs paying full price for Stars & Honey?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'What\'s the average order value for customers using a discount vs paying full price for Stars & Honey?')">Copy</button></div>
@@ -904,7 +1135,7 @@ npm run build</pre>
     </div>
   </div>
 
-  <!-- 6. Amazon -->
+  <!-- 7. Amazon -->
   <div class="accordion">
     <button class="accordion-trigger" onclick="toggleAccordion(this)">
       <span class="acc-emoji">📦</span>
@@ -929,7 +1160,7 @@ npm run build</pre>
     </div>
   </div>
 
-  <!-- 7. Attribution -->
+  <!-- 8. Attribution -->
   <div class="accordion">
     <button class="accordion-trigger" onclick="toggleAccordion(this)">
       <span class="acc-emoji">🔍</span>
@@ -955,7 +1186,7 @@ npm run build</pre>
     </div>
   </div>
 
-  <!-- 8. Website & Funnel -->
+  <!-- 9. Website & Funnel -->
   <div class="accordion">
     <button class="accordion-trigger" onclick="toggleAccordion(this)">
       <span class="acc-emoji">🌐</span>
@@ -966,7 +1197,7 @@ npm run build</pre>
       <span class="acc-arrow">▾</span>
     </button>
     <div class="accordion-body">
-      <p class="acc-desc">See exactly how many visitors make it from your site all the way through to a purchase — and where the biggest drop-offs happen. Find your highest-traffic landing pages, and understand session quality by channel: bounce rate, pages per session, and time on site. Useful for diagnosing whether a drop in revenue is a traffic problem or a conversion problem.</p>
+      <p class="acc-desc">See exactly how many visitors make it from your site all the way through to a purchase — and where the biggest drop-offs happen. Find your highest-traffic landing pages, and understand session quality by channel.</p>
       <div class="prompt-grid">
         <div class="prompt-row"><span class="prompt-text">"Show me the conversion funnel for Stars & Honey this month — how many sessions turn into add-to-carts, checkouts, and purchases?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'Show me the conversion funnel for Stars & Honey this month — how many sessions turn into add-to-carts, checkouts, and purchases?')">Copy</button></div>
         <div class="prompt-row"><span class="prompt-text">"Which landing pages are getting the most traffic for FOCL in the last 30 days?"</span><button class="prompt-copy" onclick="copyPrompt(this, 'Which landing pages are getting the most traffic for FOCL in the last 30 days?')">Copy</button></div>
@@ -981,7 +1212,7 @@ npm run build</pre>
     </div>
   </div>
 
-  <!-- 9. Alerts -->
+  <!-- 10. Alerts -->
   <div class="accordion">
     <button class="accordion-trigger" onclick="toggleAccordion(this)">
       <span class="acc-emoji">🚨</span>
@@ -1173,20 +1404,16 @@ npm run build</pre>
 
 <script>
   function showTab(tab) {
-    // Hide all sections
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
 
-    // Show selected
     const section = document.getElementById('section-' + tab);
     if (section) section.classList.add('active');
 
-    // Activate button
     const btns = document.querySelectorAll('.tab-btn');
     const map = { capabilities: 0, howto: 1, install: 2 };
     if (btns[map[tab]]) btns[map[tab]].classList.add('active');
 
-    // Scroll to top of content
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -1194,11 +1421,9 @@ npm run build</pre>
     const body = trigger.nextElementSibling;
     const isOpen = trigger.classList.contains('open');
 
-    // Close all
     document.querySelectorAll('.accordion-trigger').forEach(t => t.classList.remove('open'));
     document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
 
-    // Open this one if it wasn't open
     if (!isOpen) {
       trigger.classList.add('open');
       body.classList.add('open');
